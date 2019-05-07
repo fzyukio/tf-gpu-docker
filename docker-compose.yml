@@ -1,0 +1,15 @@
+version: '2.3'
+
+services:
+  tf_gpu:
+    image: tensorflow/tensorflow:latest-gpu-py3
+    runtime: nvidia
+    ports:
+      - "8888:8888"
+    networks:
+      - default
+      - web
+networks:
+  web:
+    external:
+      name: nginx-server_web
