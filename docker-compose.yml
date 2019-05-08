@@ -2,13 +2,18 @@ version: '2.3'
 
 services:
   tf_gpu:
-    image: tensorflow/tensorflow:latest-gpu-py3
-    runtime: nvidia
+    build:
+      dockerfile: Dockerfile
+      context: .
+      network: host
+    runtime: ${runtime}
     ports:
-      - "8888:8888"
+      - "${external_port}:8888"
     networks:
       - default
       - web
+    volumes:
+      - ./notebooks:/code/notebooks
 networks:
   web:
     external:
